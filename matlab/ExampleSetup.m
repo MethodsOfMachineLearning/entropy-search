@@ -49,8 +49,7 @@ y = linspace(in.xmin(2), in.xmax(2), r);
 [X, Y] = meshgrid(x, y);
 V = [X(:), Y(:)];
 
-% evaluate both the GP and the objective function
-% (this only works in the demo, of course!)
+% evaluate the GP on a grid
 [Zm, Zs] = gp(GP.hyp, @infExact, [], GP.covfunc, GP.likfunc, GP.x, GP.y, V);
 Zm = reshape(Zm, size(X));
 Zs = reshape(sqrt(Zs), size(X));

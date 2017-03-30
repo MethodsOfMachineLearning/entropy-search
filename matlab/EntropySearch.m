@@ -62,10 +62,25 @@ S0= 0.5 * norm(in.xmax - in.xmin);
 
 %% iterations
 converged = false;
-numiter   = 0;
-MeanEsts  = zeros(0,D);
-MAPEsts   = zeros(0,D);
-BestGuesses= zeros(0,D);
+numiter   = 1;
+MeanEsts  = zeros(1,D);
+MAPEsts   = zeros(1,D);
+BestGuesses= zeros(1,D);
+
+% first step: sample at random, if not data is available
+fprintf('\n');
+disp(['iteration number ' num2str(numiter)])
+disp 'sampling at random'
+    
+xp                = in.xmin + (in.xmax - in.xmin) .* rand(1,D);
+yp                = in.f(xp);
+
+GP.x              = [GP.x ; xp ];
+GP.y              = [GP.y ; yp ];
+%GP.dy             = [GP.dy; dyp];
+GP.K              = k_matrix(GP,GP.x) + diag(GP_noise_var(GP,GP.y));
+GP.cK             = chol(GP.K);
+
 while ~converged && (numiter < in.MaxEval)
     numiter = numiter + 1;
     fprintf('\n');
@@ -106,14 +121,19 @@ while ~converged && (numiter < in.MaxEval)
         Xdh        = zeros(in.Ne,1);
         fprintf('\nsampling start points for search for optimal evaluation points\n')
         xxs = zeros(10*in.Ne,D);
+        sampling = true;
         for i = 1:10 * in.Ne
             if mod(i,10) == 1 && i > 1; xx = in.xmin + (in.xmax - in.xmin) .* rand(1,D); end;
             
-            try
-                xx = Slice_ShrinkRank_nolog(xx,dH_fun_p,S0,true);
-            catch error
+            if sampling
+                try
+                    xx = Slice_ShrinkRank_nolog(xx,dH_fun_p,S0,true);
+                catch error
+                    sampling = false;
+                    disp 'slice sampling failed, using uniform sampling'
+                end
+            else
                 xx = in.xmin + (in.xmax - in.xmin) .* rand(1,D);
-                fprintf('.')
             end
                 
             xxs(i,:) = xx;
