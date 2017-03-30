@@ -178,7 +178,15 @@ while ~converged && (numiter < in.MaxEval)
         if in.LearnHypers
             minimizeopts.length    = 10;
             minimizeopts.verbosity = 0;
-            opt_hyp = minimize(GP.hyp,@(x)in.HyperPrior(x,GP.x,GP.y),minimizeopts);
+            [opt_hyp_gp, f_gp] = minimize(GP.hyp,@(x)in.HyperPrior(x,GP.x,GP.y),minimizeopts);
+            [opt_hyp_in, f_in] = minimize(in.hyp,@(x)in.HyperPrior(x,GP.x,GP.y),minimizeopts);
+            
+            if f_gp(end) < f_in(end)
+                opt_hyp = opt_hyp_gp;
+            else
+                opt_hyp = opt_hyp_in;
+            end
+            
             if ~any(isnan([opt_hyp.cov; opt_hyp.lik]))
                 GP.hyp = opt_hyp;
             else
