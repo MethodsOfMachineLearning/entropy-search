@@ -7,3 +7,4 @@ temp/
 *.kdev*
 *.kate-swp
 nbproject
+*.mexa64

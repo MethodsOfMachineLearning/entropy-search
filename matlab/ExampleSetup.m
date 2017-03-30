@@ -11,6 +11,8 @@
 run ext/gpml/startup.m  % gpml toolbox
 addpath ext/logsumexp/  % logsumexp package
 addpath ext/tprod/      % tprod package
+% addpath util/           % adding utilities
+addpath ../cpp/         % adding cpp version of some functions
 
 %% set up and run entropy search
 
