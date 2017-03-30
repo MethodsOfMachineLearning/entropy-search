@@ -18,13 +18,13 @@ From the matlab subdirectory, you should be able to call
 
 EntropySearch(in), where
 
-in.covfunc      = {@covSEard};       % GP kernel
-in.covfunc_dx   = {@covSEard_dx_MD}; % derivative of GP kernel. You can use covSEard_dx_MD and covRQard_dx_MD if you use Carl's & Hannes' covSEard, covRQard, respectively.
-in.hyp          = hyp;  % hyperparameters, with fields .lik (noise level) and .cov (kernel hyperparameters), see documentation of the kernel functions for details.
-in.xmin         = xmin; % lower bounds of rectangular search domain
-in.xmax         = xmax; % upper bounds of rectangular search domain
-in.MaxEval      = H;    % Horizon (number of evaluations allowed)
-in.f            = @(x) f(x) % handle to objective function
+in.covfunc      = {@covSEard};       % GP kernel  
+in.covfunc_dx   = {@covSEard_dx_MD}; % derivative of GP kernel. You can use covSEard_dx_MD and covRQard_dx_MD if you use Carl's & Hannes' covSEard, covRQard, respectively.  
+in.hyp          = hyp;  % hyperparameters, with fields .lik (noise level) and .cov (kernel hyperparameters), see documentation of the kernel functions for details.  
+in.xmin         = xmin; % lower bounds of rectangular search domain  
+in.xmax         = xmax; % upper bounds of rectangular search domain  
+in.MaxEval      = H;    % Horizon (number of evaluations allowed)  
+in.f            = @(x) f(x) % handle to objective function  
 
 That handle @f is obviously the core part of the problem. If you use this method for actual experimental design, use the "PhysicalExperiment" function handle, which simply prompts for user input at the selected locations.
 
@@ -40,5 +40,5 @@ Copyright
 
 (C) 2011, 2017 Max Planck Institute for Intelligent Systems
 
-Philipp Hennig & Christian Schuler, 2011
+Philipp Hennig & Christian Schuler, 2011  
 Edgar D. Klenske, 2017
