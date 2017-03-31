@@ -10,6 +10,7 @@ Dependencies
 
 * the Matlab optimization toolbox. If you do not have this, you can go through the code and replace calls to fmincon with fminbnd (much less efficient), or with a call to minimize.m (which you can get from http://www.gaussianprocess.org/gpml/code/matlab/util/minimize.m). But note that minimize does not automatically handle linear constraints. You can implement those naively by changing function handles such that they return +inf whenever evaluated outside the bounds.
 
+All other dependencies (Eigen, logsumexp, tprod) are currently part of this repository.
 
 Running Entropy Search
 ----------------------
@@ -32,13 +33,13 @@ That handle @f is obviously the core part of the problem. If you use this method
 Demo Experiment
 ---------------
 
-An example script can be found in ExampleSetup.m, it tries to find an optimum for the Rosenbrock function and plots the resulting Gaussian process afterwards.
+An example script can be found in `ExampleSetup.m`, it tries to find an optimum for the Rosenbrock function and plots the resulting Gaussian process afterwards.
 
 
 Compiling
 ---------
 
-Part by part, the code of Entropy Search will be replaced by cpp/mex implementations to achieve a considerable speedup. The Matlab version of the replaced code resides in the `util` subdirectory, while the C++ implementation is in `cpp`. To compile, run the script `compile_utilities.m`. The mex-files take precendence over the Matlab implementation.
+Part by part, the code of Entropy Search will be replaced by cpp/mex implementations to achieve a considerable speedup. The Matlab version of the replaced code resides in the `util` subdirectory, while the c++ implementation is in `cpp`. To compile, run the script `compile_utilities.m`. The mex-files take precendence over the Matlab implementation.
 
 
 Copyright
