@@ -35,6 +35,12 @@ Demo Experiment
 An example script can be found in ExampleSetup.m, it tries to find an optimum for the Rosenbrock function and plots the resulting Gaussian process afterwards.
 
 
+Compiling
+---------
+
+Part by part, the code of Entropy Search will be replaced by cpp/mex implementations to achieve a considerable speedup. The Matlab version of the replaced code resides in the `util` subdirectory, while the C++ implementation is in `cpp`. To compile, run the script `compile_utilities.m`. The mex-files take precendence over the Matlab implementation.
+
+
 Copyright
 ---------
 
