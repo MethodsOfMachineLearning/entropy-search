@@ -131,6 +131,7 @@ while ~converged && (numiter < in.MaxEval)
                 catch error
                     sampling = false;
                     disp 'slice sampling failed, using uniform sampling'
+                    disp 'probably the algorithm converged and can be stopped'
                 end
             else
                 xx = in.xmin + (in.xmax - in.xmin) .* rand(1,D);
