@@ -11,8 +11,7 @@
 run ext/gpml/startup.m  % gpml toolbox
 addpath ext/logsumexp/  % logsumexp package
 addpath ext/tprod/      % tprod package
-% addpath util/           % adding utilities
-addpath ../cpp/         % adding cpp version of some functions
+addpath util/           % matlab version of utilities
 
 %% set up and run entropy search
 
@@ -34,7 +33,7 @@ in.xmax         = [2,2]; % upper bounds of rectangular search domain
 in.MaxEval      = 60;    % Horizon (number of evaluations allowed)
 
 % objective function:
-in.f            = @(x) Rosenbrock(x); % handle to objective function
+in.f            = @(x) GaussProcess(x); % handle to objective function
 
 result = EntropySearch(in); % the output is a struct which contains GP datasets, which can be evaluated with the gpml toolbox.
 
@@ -62,5 +61,11 @@ surf(X,Y,Zm,'FaceAlpha', 0.8, 'EdgeAlpha', 0.4)
 surf(X,Y,Zm + 2*Zs,'FaceAlpha', 0.3, 'EdgeAlpha', 0.15)
 surf(X,Y,Zm - 2*Zs,'FaceAlpha', 0.3, 'EdgeAlpha', 0.15)
 plot3(GP.x(:,1), GP.x(:,2), GP.y, 'or')
+
+% plot true function (only works in the demo case)
+Zt = reshape(in.f(V),size(X));
+surf(X,Y,Zt,'FaceAlpha', 0.01, 'EdgeAlpha', 0.9, 'FaceColor', 'k')
+
+drawnow
 
 
