@@ -1,0 +1,9 @@
+.gitignore~
+*.*~
+*.swp
+*.orig
+build/
+temp/
+*.kdev*
+*.kate-swp
+nbproject
