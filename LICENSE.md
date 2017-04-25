@@ -1,5 +1,6 @@
-% Copyright © 2011-2012, Philipp Hennig & Christian J. Schuler
-% Version 1.0, released May 2012
+% Copyright (c) 2011-2012, Philipp Hennig & Christian J. Schuler
+% Copyright (c) 2017, Max Planck Society
+% Version 1.1, March 2017
 %
 % Permission is hereby granted, free of charge, to any person OBTAINING A COPY
 % OF THIS SOFTWARE AND ASSOCIATED DOCUMENTATION FILES (THE "SOFTWARE"), TO DEAL
